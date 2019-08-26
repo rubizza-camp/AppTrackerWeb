@@ -7,6 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Rating from '@material-ui/lab/Rating';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
+import SubscriptionEl from './subscription_element'
 
 function loadPlotStarsCountData(shop_type, data_type) {
   var xN = [];
@@ -336,8 +337,8 @@ export default function CommentsPlotTab() {
             </IconButton>
           </div>
         </Grid>
-        <Grid item xs={12} sm={12} style={{ margin: 10, textAlign: 'center' }}>
-          Total number of star-ratings per day
+        <Grid item xs={12} sm={12} className='flext-center'>
+          <SubscriptionEl />
         </Grid>
         <Grid
           item
@@ -349,6 +350,9 @@ export default function CommentsPlotTab() {
           onLoad={add_BarChart_with_latency('CommentsAndroidBarChartId1', 'android')}
         >
           <CircularProgress />
+        </Grid>
+        <Grid item xs={12} sm={12} style={{ margin: 10, textAlign: 'center' }}>
+          Total number of star-ratings per day
         </Grid>
         <Grid item xs={12} sm={6}>
           {/* <Grid item xs={12} sm={12} style={{margin: 10, textAlign: "center"}}>Total number of star-ratings per day</Grid> */}
