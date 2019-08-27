@@ -7,7 +7,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Rating from '@material-ui/lab/Rating';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
-import SubscriptionEl from './SubscriptionElement'
 
 function loadPlotStarsCountData(shop_type, data_type) {
   var xN = [];
@@ -336,9 +335,6 @@ export default function CommentsPlotTab() {
               ></Icon>
             </IconButton>
           </div>
-        </Grid>
-        <Grid item xs={12} sm={12} className='flext-center'>
-          <SubscriptionEl />
         </Grid>
         <Grid
           item
