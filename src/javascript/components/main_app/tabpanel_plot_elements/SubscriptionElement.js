@@ -23,14 +23,14 @@ export default function FormDialog() {
         <div>
             <Button variant="contained" style={{
                 borderRadius: 35,
-                backgroundColor: "#ffffff",
+                backgroundColor: "#e0e0e0",
                 padding: "8px 26px",
                 fontSize: "18px",
-                color:"#e9028f"
+                color:"#000000"
             }}
                 onClick={handleClickOpen}>
                 <Icon className='material-icons-outlined'>mail_outline</Icon>
-                &#160; Subscribe to this app
+                &#160; Subscribe
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>

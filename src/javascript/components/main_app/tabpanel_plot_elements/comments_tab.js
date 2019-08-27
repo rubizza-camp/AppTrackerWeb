@@ -7,7 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Rating from '@material-ui/lab/Rating';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
-import SubscriptionEl from './subscription_element'
+import SubscriptionEl from './SubscriptionElement'
 
 function loadPlotStarsCountData(shop_type, data_type) {
   var xN = [];
