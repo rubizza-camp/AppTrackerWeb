@@ -9,17 +9,17 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import SwipeableViews from 'react-swipeable-views';
-import CommentsPlotTab from './tabpanel_plot_elements/comments_tab.js';
-import DownloadsPlotTab from './tabpanel_plot_elements/downloads_tab.js';
-import RankPositionsPlotTab from './tabpanel_plot_elements/rank_positions_tab.js';
+import CommentsPlotTab from './tabpanel_plot_elements/comments_tab';
+import DownloadsPlotTab from './tabpanel_plot_elements/downloads_tab';
+import RankPositionsPlotTab from './tabpanel_plot_elements/rank_positions_tab';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
     <Typography
-      component="div"
-      role="tabpanel"
+      component='div'
+      role='tabpanel'
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
@@ -33,13 +33,13 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
 };
 
 function a11yProps(index) {
   return {
     id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`
   };
 }
 
@@ -48,11 +48,11 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: 'flex',
-    height: 224,
+    height: 224
   },
   tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`,
-  },
+    borderRight: `1px solid ${theme.palette.divider}`
+  }
 }));
 
 export default function VerticalTabs() {
@@ -70,33 +70,38 @@ export default function VerticalTabs() {
     <>
       <Grid item xs={12} sm={12}>
         <div className='card-covei'>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-          >
-            <Tab icon={<Icon className="material-icons-outlined">thumbs_up_down</Icon>} label="COMMENTS RATINGS" className="unset-max-width" {...a11yProps(0)} />
-            <Tab icon={<Icon className="material-icons-outlined">save_alt</Icon>} label="DOWNLOADS" className="unset-max-width" {...a11yProps(1)} />
-            <Tab icon={<Icon className="material-icons-outlined">stars</Icon>} label="RANK POSITIONS" className="unset-max-width" {...a11yProps(2)} />
+          <Tabs value={value} onChange={handleChange} indicatorColor='primary' textColor='primary' centered>
+            <Tab
+              icon={<Icon className='material-icons-outlined'>thumbs_up_down</Icon>}
+              label='COMMENTS RATINGS'
+              className='unset-max-width'
+              {...a11yProps(0)}
+            />
+            <Tab
+              icon={<Icon className='material-icons-outlined'>save_alt</Icon>}
+              label='DOWNLOADS'
+              className='unset-max-width'
+              {...a11yProps(1)}
+            />
+            <Tab
+              icon={<Icon className='material-icons-outlined'>stars</Icon>}
+              label='RANK POSITIONS'
+              className='unset-max-width'
+              {...a11yProps(2)}
+            />
           </Tabs>
         </div>
       </Grid>
       <Grid item xs={12} sm={12}>
         <div className='card-covei'>
-          <SwipeableViews
-            axis={'x'}
-            index={value}
-            onChangeIndex={handleChangeIndex}
-          >
-            <TabPanel value={value} index={0} className="plot-covei">
+          <SwipeableViews axis={'x'} index={value} onChangeIndex={handleChangeIndex}>
+            <TabPanel value={value} index={0} className='plot-covei'>
               <CommentsPlotTab></CommentsPlotTab>
             </TabPanel>
-            <TabPanel value={value} index={1} className="plot-covei">
+            <TabPanel value={value} index={1} className='plot-covei'>
               <DownloadsPlotTab></DownloadsPlotTab>
             </TabPanel>
-            <TabPanel value={value} index={2} className="plot-covei">
+            <TabPanel value={value} index={2} className='plot-covei'>
               <RankPositionsPlotTab></RankPositionsPlotTab>
             </TabPanel>
           </SwipeableViews>
