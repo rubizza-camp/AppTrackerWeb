@@ -22,12 +22,12 @@ function loadMinMaxValueData() {
             date: 0
           },
           min: {
-            value: 0,
-            date: 0
+            value: 'Coming soon',
+            date: 'Coming soon'
           },
           max: {
-            value: 0,
-            date: 0
+            value: 'Coming soon',
+            date: 'Coming soon'
           }
         },
         us: {
@@ -68,12 +68,12 @@ function loadMinMaxValueData() {
             date: 0
           },
           min: {
-            value: 0,
-            date: 0
+            value: 'Coming soon',
+            date: 'Coming soon'
           },
           max: {
-            value: 0,
-            date: 0
+            value: 'Coming soon',
+            date: 'Coming soon'
           }
         },
         us: {
