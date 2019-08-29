@@ -1,9 +1,9 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-require('dotenv').config()
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+require('dotenv').config();
 
-const NODE_ENV = process.env.NODE_ENV || 'development'
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 const config = {
   entry: './src/index.js',
@@ -64,8 +64,14 @@ const config = {
       template: path.join(__dirname, 'public/index.html'),
       favicon: path.join(__dirname, 'public/favicon.ico')
     })
-  ]
-}
+  ],
+  devServer: {
+    port: 8080,
+    historyApiFallback: {
+      index: 'index.html'
+    }
+  }
+};
 
 module.exports = _ => {
   if (NODE_ENV === 'production') {
@@ -76,7 +82,7 @@ module.exports = _ => {
           sourceMap: false
         })
       ]
-    }
+    };
   }
-  return config
-}
+  return config;
+};

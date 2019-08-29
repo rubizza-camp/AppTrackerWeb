@@ -46,13 +46,14 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-plotly.js": "^2.3.0",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-svg": "^10.0.14",
     "react-swipeable-views": "^0.13.3"
   },
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --open",
-    "build": "webpack --config webpack.config.js"
+    "build": "NODE_ENV=production webpack --config webpack.config.js"
   },
   "eslintConfig": {
     "extends": "react-app"
