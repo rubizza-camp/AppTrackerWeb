@@ -1,5 +1,5 @@
 // jshint esversion:9
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import Paper from '@material-ui/core/Paper';
@@ -16,6 +16,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import AppTrackerTitleColored from '../icons/AppTrackerTitleColored';
+import { searchApplication } from '../../actions/applications';
 
 function startLoadAppInfo(name) {
   axios.get('https://' + 'apptracker.club' + ':3000/api/v1/apps/' + name).then(response => {
@@ -48,33 +49,19 @@ function startLoadAppInfo(name) {
   });
 }
 
-const newPartElement = (element_data, id) => (
-  <ListItem
-    button
-    key={id}
-    style={{ borderRadius: '50px', marginLeft: '5px', paddingLeft: '9px', width: 'auto' }}
-    onClick={() => {
-      // window.location.href = element_data.google_play_link;
-      if (!document.getElementById('MainSearchEl').classList.contains('hide_transition')) {
-        document.getElementById('MainSearchEl').classList.remove('show_transition');
-        document.getElementById('MainSearchEl').classList.add('hide_transition');
-        setTimeout(() => {
-          //Начинаем выгрузку данных
-          startLoadAppInfo(element_data.attributes.title);
-        }, 100);
-      }
-    }}
-  >
-    <div
+const AppListSearchItem = ({ id, attributes: { title, icon_url } }) => (
+  <ListItem button key={id} style={{ borderRadius: '50px', marginLeft: '5px', paddingLeft: '9px', width: 'auto' }}>
+    <img
       style={{
         height: '40px',
         width: '40px',
-        borderRadius: '100%',
-        backgroundImage: "url('" + element_data.attributes.icon_url + "')",
-        backgroundSize: 'cover'
+        borderRadius: '100%'
       }}
-    ></div>
-    <ListItemText className='ml-10 unhover' primary={element_data.attributes.title} />
+      src={icon_url}
+    />
+
+    <ListItemText className='ml-10 unhover' primary={title} />
+
     <div
       style={{
         marginLeft: 'auto'
@@ -85,49 +72,39 @@ const newPartElement = (element_data, id) => (
   </ListItem>
 );
 
-class SearchStart extends React.Component {
-  create_search_result_fields(data) {
-    if (data.length != 0) {
-      var components = [];
-      components.push(
-        <Divider
-          key='divider'
-          style={{ width: '74%', height: 1, marginBottom: '11px', marginLeft: '12%', marginRight: '12%' }}
-        />
-      );
-      for (var i = 0; i < data.length; i++) components.push(newPartElement(data[i], i));
-      const newFieldCount = React.createElement(List, { id: 'some', className: 'non-selectable' }, components);
-      ReactDOM.render(newFieldCount, document.getElementById('search_field'));
-    } else {
-      ReactDOM.render('', document.getElementById('search_field'));
-    }
+let searchTimer = null;
+
+const onSearchInputChange = setApps => ({ currentTarget: { value } }) => {
+  if (!searchTimer) {
+    clearTimeout(searchTimer);
+    searchTimer = null;
   }
 
-  search_request = event => {
-    if (this.searchTimer != undefined) {
-      clearTimeout(this.searchTimer);
-      this.searchTimer = undefined;
-    }
+  if (value != '') {
+    searchTimer = setTimeout(() => {
+      searchApplication(value).then(setApps);
+    }, 100);
+  } else {
+    setApps(null);
+  }
+};
 
-    var target = event.currentTarget;
-    if (target.value != '') {
-      this.searchTimer = setTimeout(() => {
-        // axios.get('https://'+document.domain+':3000/api/v0/packages?name='+target.value)
-        axios
-          .get('https://' + 'apptracker.club' + ':3000/api/v1/apps?title=' + target.value)
-          .then(response => {
-            if (document.getElementById('MainSearchInputField').value != '')
-              this.create_search_result_fields(response.data.data);
-          })
-          .catch(error => console.log(error));
-      }, 100);
-    } else {
-      ReactDOM.render('', document.getElementById('search_field'));
-    }
-  };
+const AppsSearchList = ({ apps }) => (
+  <List id='some' className='non-selectable'>
+    {apps.length ? (
+      apps.map(app => <AppListSearchItem {...app} />)
+    ) : (
+      <ListItem>
+        <ListItemText className='ml-10 unhover' primary='Empty' />
+      </ListItem>
+    )}
+  </List>
+);
 
-  render() {
-    return (
+export default props => {
+  const [apps, setApps] = useState(null);
+  return (
+    <div id='MainSearchEl' className='show_transition flext-center'>
       <Grid container style={{ width: '98vw', maxWidth: '600px', marginTop: '25vh' }}>
         <Grid item xs={12} className='flext-center'>
           <AppTrackerTitleColored style={{ minWidth: '250px', width: '50%', padding: '15px' }}></AppTrackerTitleColored>
@@ -151,13 +128,15 @@ class SearchStart extends React.Component {
               <InputBase
                 autoComplete='off'
                 id='MainSearchInputField'
-                onChange={this.search_request}
+                onChange={onSearchInputChange(setApps)}
                 style={{ marginLeft: 8, flex: 1 }}
                 placeholder='Search application'
                 inputProps={{ 'aria-label': 'Search application' }}
               />
             </Paper>
-            <div id='search_field' style={{ maxHeight: '30vh', overflowY: 'scroll', overflowX: 'hidden' }}></div>
+            <div id='search_field' style={{ maxHeight: '30vh', overflowY: 'scroll', overflowX: 'hidden' }}>
+              {apps && <AppsSearchList apps={apps} />}
+            </div>
           </div>
         </Grid>
         <Grid item xs={12}></Grid>
@@ -174,8 +153,6 @@ class SearchStart extends React.Component {
           </Container>
         </Grid>
       </Grid>
-    );
-  }
-}
-
-export default SearchStart;
+    </div>
+  );
+};
