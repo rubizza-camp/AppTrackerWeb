@@ -6,8 +6,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import ReactDOM from 'react-dom';
 import Rating from '@material-ui/lab/Rating';
-import MainAppField from '../../main_app/main_app_field.js';
-import Grid from '@material-ui/core/Grid';
+import ApplicationView from '../main/ApplicationView';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -27,15 +26,15 @@ function startLoadAppInfo(name) {
     window.dynamicInfos = dynamicInfos;
     window.ratings = ratings.sort(function(a, b) {
       if (a.Date > b.Date) {
-        return -1;
+        return 1;
       }
       if (a.Date < b.Date) {
-        return 1;
+        return -1;
       }
       return 0;
     });
     ReactDOM.unmountComponentAtNode(document.getElementById('root'));
-    ReactDOM.render(React.createElement(MainAppField), document.getElementById('root'));
+    ReactDOM.render(React.createElement(ApplicationView), document.getElementById('root'));
     document.getElementById('root').setAttribute('style', 'margin-top: 20px; display: flex; justify-content: center;');
   });
 }
@@ -71,7 +70,7 @@ const newPartElement = (element_data, id) => (
   </ListItem>
 );
 
-class MinSearchEl extends React.Component {
+class SearchMin extends React.Component {
   create_search_result_fields(data) {
     if (data.length != 0) {
       var components = [];
@@ -115,10 +114,18 @@ class MinSearchEl extends React.Component {
   render() {
     return (
       <div
-        style={{ padding: '4px 4px', borderRadius: '28px', overflow: 'hidden', width: '100%' }}
+        style={{ padding: '4px 4px', borderRadius: '50px', overflow: 'hidden', width: '100%' }}
         className='mdc-elevation--z1'
       >
-        <Paper style={{ borderRadius: 'none !important', boxShadow: 'none', display: 'flex', alignItems: 'center' }}>
+        <Paper
+          style={{
+            borderRadius: 'none !important',
+            boxShadow: 'none',
+            borderRadius: '50px',
+            display: 'flex',
+            alignItems: 'center'
+          }}
+        >
           <IconButton style={{ color: '#9900FF' }} className='material-icons-outlined'>
             search
           </IconButton>
@@ -142,4 +149,4 @@ class MinSearchEl extends React.Component {
   }
 }
 
-export default MinSearchEl;
+export default SearchMin;

@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactSVG from 'react-svg';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import MinSearchEl from './min_search_element/min_search_element.js';
-import VerticalTabs from './tabs_and_plots.js';
+import SearchMin from '../search/SearchMin';
+import HorizontalTabs from '../main/Tabs';
+import AppTrackerTitleColored from '../icons/AppTrackerTitleColored';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MainAppField() {
+export default function ApplicationView() {
   const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
 
@@ -27,15 +27,14 @@ export default function MainAppField() {
       <Grid item xs={12}>
         <Grid container justify='center' spacing={spacing}>
           <Grid item xs={12} sm={4} className='flext-center'>
-            <ReactSVG
+            <AppTrackerTitleColored
               style={{ width: '80%', maxWidth: '250px', minWidth: '180px ' }}
-              src='Icons/AppTrackerTitleColored.svg'
-            />
+            ></AppTrackerTitleColored>
           </Grid>
           <Grid item xs={12} sm={8} className='flext-center'>
-            <MinSearchEl></MinSearchEl>
+            <SearchMin></SearchMin>
           </Grid>
-          <VerticalTabs></VerticalTabs>
+          <HorizontalTabs></HorizontalTabs>
         </Grid>
       </Grid>
     </Grid>

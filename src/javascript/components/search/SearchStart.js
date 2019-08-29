@@ -1,7 +1,6 @@
 // jshint esversion:9
 import React from 'react';
 import axios from 'axios';
-import ReactSVG from 'react-svg';
 import ReactDOM from 'react-dom';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -12,13 +11,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
-import MainAppField from '../main_app/main_app_field.js';
+import ApplicationView from '../main/ApplicationView';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-import './search_element.css';
+import AppTrackerTitleColored from '../icons/AppTrackerTitleColored';
 
 function startLoadAppInfo(name) {
   axios.get('https://' + 'apptracker.club' + ':3000/api/v1/apps/' + name).then(response => {
@@ -46,7 +43,7 @@ function startLoadAppInfo(name) {
     console.log(window.dynamicInfos);
     console.log(window.ratings);
 
-    ReactDOM.render(React.createElement(MainAppField), document.getElementById('root'));
+    ReactDOM.render(React.createElement(ApplicationView), document.getElementById('root'));
     document.getElementById('root').setAttribute('style', 'margin-top: 20px; display: flex; justify-content: center;');
   });
 }
@@ -88,7 +85,7 @@ const newPartElement = (element_data, id) => (
   </ListItem>
 );
 
-class SearchEl extends React.Component {
+class SearchStart extends React.Component {
   create_search_result_fields(data) {
     if (data.length != 0) {
       var components = [];
@@ -133,10 +130,7 @@ class SearchEl extends React.Component {
     return (
       <Grid container style={{ width: '98vw', maxWidth: '600px', marginTop: '25vh' }}>
         <Grid item xs={12} className='flext-center'>
-          <ReactSVG
-            style={{ minWidth: '250px', width: '50%', padding: '15px' }}
-            src='Icons/AppTrackerTitleColored.svg'
-          />
+          <AppTrackerTitleColored style={{ minWidth: '250px', width: '50%', padding: '15px' }}></AppTrackerTitleColored>
         </Grid>
         <Grid item xs={12}>
           <div
@@ -184,4 +178,4 @@ class SearchEl extends React.Component {
   }
 }
 
-export default SearchEl;
+export default SearchStart;

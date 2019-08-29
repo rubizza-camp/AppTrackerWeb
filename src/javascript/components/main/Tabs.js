@@ -9,9 +9,9 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import SwipeableViews from 'react-swipeable-views';
-import CommentsPlotTab from './tabpanel_plot_elements/comments_tab';
-import DownloadsPlotTab from './tabpanel_plot_elements/downloads_tab';
-import RankPositionsPlotTab from './tabpanel_plot_elements/rank_positions_tab';
+import Stars from './tabs/Star';
+import Downloads from './tabs/Donwload';
+import Rank from './tabs/Rank';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function VerticalTabs() {
+export default function HorizontalTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -96,13 +96,13 @@ export default function VerticalTabs() {
         <div className='card-covei'>
           <SwipeableViews axis={'x'} index={value} onChangeIndex={handleChangeIndex}>
             <TabPanel value={value} index={0} className='plot-covei'>
-              <CommentsPlotTab></CommentsPlotTab>
+              <Stars></Stars>
             </TabPanel>
             <TabPanel value={value} index={1} className='plot-covei'>
-              <DownloadsPlotTab></DownloadsPlotTab>
+              <Downloads></Downloads>
             </TabPanel>
             <TabPanel value={value} index={2} className='plot-covei'>
-              <RankPositionsPlotTab></RankPositionsPlotTab>
+              <Rank></Rank>
             </TabPanel>
           </SwipeableViews>
         </div>

@@ -1,18 +1,17 @@
 // jshint esversion:9
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import SearchEl from './components/main_search_element/search_element.js';
+import SearchStart from './components/search/SearchStart';
 
-class MyApp extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <>
         <div id='MainSearchEl' className='show_transition flext-center'>
-          <SearchEl></SearchEl>
+          <SearchStart></SearchStart>
         </div>
       </>
     );
   }
 }
 
-export default MyApp;
+export default App;

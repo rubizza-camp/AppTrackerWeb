@@ -7,7 +7,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Rating from '@material-ui/lab/Rating';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 const PieBarChart = (width, height, data) => (
@@ -806,7 +805,7 @@ function add_BarChart_with_latency(id, shop_type) {
   }, 1);
 }
 
-export default function CommentsPlotTab() {
+export default function Stars() {
   const data = loadMinMaxValueData();
   return (
     <>

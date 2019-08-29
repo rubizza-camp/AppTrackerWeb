@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import Grid from '@material-ui/core/Grid';
 import Plot from 'react-plotly.js';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Rating from '@material-ui/lab/Rating';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 
@@ -12,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 // window.dynamicInfos = dynamicInfos;
 // window.ratings = ratings;
 
-function loadBarChartDownloadsCountData(shop_type) {
+function loadBarChartCountData(shop_type, line_type) {
   var xN = [];
   var yN = [];
 
@@ -28,7 +27,7 @@ function loadBarChartDownloadsCountData(shop_type) {
   yN.push([]);
   for (var i = 0; i < window.dynamicInfos.length; i++) {
     if (window.dynamicInfos[i].Country == 'ru')
-      if (window.dynamicInfos[i].ShopType == shop_type) yN[index].push(window.dynamicInfos[i].Downloads);
+      if (window.dynamicInfos[i].ShopType == shop_type) yN[index].push(window.dynamicInfos[i][line_type]);
   }
   index++;
 
@@ -36,7 +35,7 @@ function loadBarChartDownloadsCountData(shop_type) {
   yN.push([]);
   for (var i = 0; i < window.dynamicInfos.length; i++) {
     if (window.dynamicInfos[i].Country == 'us')
-      if (window.dynamicInfos[i].ShopType == shop_type) yN[index].push(window.dynamicInfos[i].Downloads);
+      if (window.dynamicInfos[i].ShopType == shop_type) yN[index].push(window.dynamicInfos[i][line_type]);
   }
   index++;
 
@@ -46,7 +45,7 @@ function loadBarChartDownloadsCountData(shop_type) {
   };
 }
 
-const newDownloadBarChartElement = (width, height, data) => (
+const newBarChartElement = (width, height, data, autorange_type, title_text) => (
   <>
     <Plot
       config={{ displayModeBar: false }}
@@ -57,29 +56,29 @@ const newDownloadBarChartElement = (width, height, data) => (
           x: data.x,
           y: data.y[0],
           name: 'Russian',
-          stackgroup: 'one',
+          mode: 'lines',
           line: {
             shape: 'spline',
             width: 2,
-            color: '#E8C448'
+            color: '#eb7659'
           }
         },
         {
           x: data.x,
           y: data.y[1],
           name: 'United States',
-          stackgroup: 'one',
+          mode: 'lines',
           line: {
             shape: 'spline',
             width: 2,
-            color: '#6561FF'
+            color: '#9318ff'
           }
         }
       ]}
       layout={{
         legend: {
           x: 0,
-          y: 1,
+          y: -0.75,
           traceorder: 'normal',
           font: {
             family: 'sans-serif',
@@ -88,14 +87,13 @@ const newDownloadBarChartElement = (width, height, data) => (
           },
           bgcolor: '#FFFFFF',
           bordercolor: '#FFFFFF',
-          borderRadius: 4,
           borderwidth: 2
         },
         margin: {
           l: 40,
           r: 35,
-          b: 50,
-          t: 0,
+          b: 20,
+          t: 10,
           pad: 0
         },
         width: width,
@@ -123,30 +121,32 @@ const newDownloadBarChartElement = (width, height, data) => (
           }
         },
         yaxis: {
+          rangemode: 'nonnegative',
           showgrid: true,
           zeroline: false,
           showline: false,
-          showticklabels: true
+          showticklabels: true,
+          autorange: autorange_type
         }
       }}
     />
   </>
 );
 
-function add_DownloadBarChart_with_latency(id, shop_type) {
+function add_BarChart_with_latency(id, shop_type, line_type, autorange_type) {
   setTimeout(() => {
     var width = document.getElementById(id).offsetWidth;
     var height = document.getElementById(id).offsetHeight;
 
     // Рендерим основное
     ReactDOM.render(
-      newDownloadBarChartElement(width, height, loadBarChartDownloadsCountData(shop_type)),
+      newBarChartElement(width, height, loadBarChartCountData(shop_type, line_type), autorange_type),
       document.getElementById(id)
     );
   }, 1);
 }
 
-export default function DownloadsPlotTab() {
+export default function Rank() {
   return (
     <>
       <Grid container>
@@ -180,19 +180,38 @@ export default function DownloadsPlotTab() {
             </IconButton>
           </div>
         </Grid>
-        <Grid item xs={12} sm={12} style={{ margin: 10, textAlign: 'center' }}>
-          Downloads count per day by countries
+        <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12} style={{ padding: 10, textAlign: 'center' }}>
+            Power
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            id='RankAndroidBarChartId1'
+            className='flext-center non-selectable'
+            style={{ minHeight: 200, maxHeight: 255 }}
+            onLoad={add_BarChart_with_latency('RankAndroidBarChartId1', 'android', 'Power', true)}
+          >
+            <CircularProgress />
+          </Grid>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          id='DownloadsAndroidBarChartId1'
-          className='flext-center non-selectable'
-          style={{ minHeight: 350 }}
-          onLoad={add_DownloadBarChart_with_latency('DownloadsAndroidBarChartId1', 'android')}
-        >
-          <CircularProgress />
+
+        <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12} style={{ padding: 10, textAlign: 'center' }}>
+            Rank
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            id='PowerAndroidBarChartId1'
+            className='flext-center non-selectable'
+            style={{ minHeight: 200, maxHeight: 255 }}
+            onLoad={add_BarChart_with_latency('PowerAndroidBarChartId1', 'android', 'Rank', 'reversed')}
+          >
+            <CircularProgress />
+          </Grid>
         </Grid>
       </Grid>
 
@@ -215,19 +234,37 @@ export default function DownloadsPlotTab() {
             </IconButton>
           </div>
         </Grid>
-        <Grid item xs={12} sm={12} style={{ margin: 10, textAlign: 'center' }}>
-          Downloads count per day by countries
+        <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12} style={{ padding: 10, textAlign: 'center' }}>
+            Power
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            id='RankIosBarChartId1'
+            className='flext-center non-selectable'
+            style={{ minHeight: 200, maxHeight: 255 }}
+            onLoad={add_BarChart_with_latency('RankIosBarChartId1', 'ios', 'Power', true)}
+          >
+            <CircularProgress />
+          </Grid>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          id='DownloadsIosBarChartId1'
-          className='flext-center non-selectable'
-          style={{ minHeight: 350 }}
-          onLoad={add_DownloadBarChart_with_latency('DownloadsIosBarChartId1', 'ios')}
-        >
-          <CircularProgress />
+        <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12} style={{ padding: 10, textAlign: 'center' }}>
+            Rank
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            id='PowerIosBarChartId1'
+            className='flext-center non-selectable'
+            style={{ minHeight: 200, maxHeight: 255 }}
+            onLoad={add_BarChart_with_latency('PowerIosBarChartId1', 'ios', 'Rank', 'reversed')}
+          >
+            <CircularProgress />
+          </Grid>
         </Grid>
       </Grid>
     </>

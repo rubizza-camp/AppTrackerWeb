@@ -4,14 +4,10 @@ import ReactDOM from 'react-dom';
 import Grid from '@material-ui/core/Grid';
 import Plot from 'react-plotly.js';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Rating from '@material-ui/lab/Rating';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
 
-// window.applicationData = response.data.data.attributes;
-// window.dynamicInfos = dynamicInfos;
-// window.ratings = ratings;
 function loadMinMaxValueData() {
   var output = {
     android: {
@@ -436,7 +432,7 @@ function add_DownloadBarChart_with_latency(id, shop_type) {
   }, 1);
 }
 
-export default function DownloadsPlotTab() {
+export default function Downloads() {
   const data = loadMinMaxValueData();
   return (
     <>
