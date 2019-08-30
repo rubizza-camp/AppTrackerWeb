@@ -56,6 +56,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'public'),
+    publicPath: '/',
     filename: 'index.js'
   },
   mode: NODE_ENV,
@@ -67,9 +68,7 @@ const config = {
   ],
   devServer: {
     port: 8080,
-    historyApiFallback: {
-      index: 'index.html'
-    }
+    historyApiFallback: true
   }
 };
 
@@ -84,5 +83,6 @@ module.exports = _ => {
       ]
     };
   }
+
   return config;
 };

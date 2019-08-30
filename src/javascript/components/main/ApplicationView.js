@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ApplicationView() {
+export default function ApplicationView({ match }) {
   const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
 
