@@ -37,14 +37,20 @@ class StartPage extends React.Component {
     );
   }
 }
+
+const HomePage = () => <StartPage />;
+const ApplicationPage = ({ match }) => <ApplicationView match={match} />;
 class App extends React.Component {
   render() {
     return (
       <>
-        <Router>
-          <Route path='/' component={StartPage} />
-          <Route path='/apps/:id' component={ApplicationView} />
-        </Router>
+        <div className='content'>
+          <Router>
+            <Route exact path='/' component={HomePage} />
+            <Route path='/apps/:id' component={ApplicationPage} />
+          </Router>
+        </div>
+
         <Footer />
       </>
     );

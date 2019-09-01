@@ -55,13 +55,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function HorizontalTabs() {
+export default function HorizontalTabs(props) {
+  const [appData, setAppData] = React.useState(props);
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   function handleChange(event, newValue) {
     setValue(newValue);
   }
+
   function handleChangeIndex(index) {
     setValue(index);
   }
@@ -96,13 +98,13 @@ export default function HorizontalTabs() {
         <div className='card-covei'>
           <SwipeableViews axis={'x'} index={value} onChangeIndex={handleChangeIndex}>
             <TabPanel value={value} index={0} className='plot-covei'>
-              <Stars></Stars>
+              <Stars {...appData} />
             </TabPanel>
             <TabPanel value={value} index={1} className='plot-covei'>
-              <Downloads></Downloads>
+              <Downloads />
             </TabPanel>
             <TabPanel value={value} index={2} className='plot-covei'>
-              <Rank></Rank>
+              <Rank />
             </TabPanel>
           </SwipeableViews>
         </div>

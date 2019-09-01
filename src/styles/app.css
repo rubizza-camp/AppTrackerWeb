@@ -245,13 +245,25 @@ body {
   font-weight: 900 !important;
 }
 
-.footer-root {
+.content {
   display: flex;
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-root {
+  margin-top: 50px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: center;
   flex-direction: column;
-  min-height: 50vh;
 }
 
 .footer-content {
+  width: 100%;
   padding: 5px;
   margin-top: auto;
   background-color: white;
@@ -360,4 +372,22 @@ body {
   clear: both;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.progress-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 100vh;
+}
+
+.mb-100px {
+  margin-bottom: 100px !important;
+}
+
+.ApplicationView {
+  margin-top: 20px;
+  width: 85vw;
+  max-width: 900px;
 }

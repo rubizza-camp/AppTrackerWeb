@@ -63,6 +63,7 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public/index.html'),
+      manifest: path.join(__dirname, 'public/manifest.json'),
       favicon: path.join(__dirname, 'public/favicon.ico')
     })
   ],

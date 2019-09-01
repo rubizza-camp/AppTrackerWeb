@@ -13,7 +13,7 @@ export const AppListSearchItem = ({ id, attributes: { title, icon_url, rating } 
     <img src={icon_url} />
     <ListItemText className='ml-10 unhover title' primary={title} />
     <div className='stars'>
-      <Rating className='search-stars-color' value={rating} readOnly />
+      <Rating className='search-stars-color' value={rating} precision={0.05} readOnly />
     </div>
   </ListItem>
 );
