@@ -12,5 +12,16 @@ export const searchApplication = title =>
 export const loadApplication = id =>
   axios
     .get(`${API_APP}${id}`)
-    .then(response => { testLoad(response); return response.data })
+    .then(response => {
+      testLoad(response);
+      return response.data;
+    })
+    .catch(error => console.log(error));
+
+export const tryIndexApp = title =>
+  axios
+    .post(`${API_APP}`, {
+      title: title
+    })
+    .then(response => {})
     .catch(error => console.log(error));

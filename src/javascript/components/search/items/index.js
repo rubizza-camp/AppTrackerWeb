@@ -9,6 +9,7 @@ import { green } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
+import { tryIndexApp } from '../../../actions/applications';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default ({ inputValue }) => {
+export default ({ inputValue, setApps }) => {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
@@ -59,14 +60,13 @@ export default ({ inputValue }) => {
   }, []);
 
   function handleButtonClick() {
-    console.log(inputValue);
     if (!loading) {
       setSuccess(false);
       setLoading(true);
-      timer.current = setTimeout(() => {
+      tryIndexApp(inputValue).then(() => {
         setSuccess(true);
         setLoading(false);
-      }, 2000);
+      });
     }
   }
 
