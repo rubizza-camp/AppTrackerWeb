@@ -73,7 +73,7 @@ export default ({ inputValue, setApps }) => {
   return (
     <Grid container>
       <Grid item xs={6} className='p-10px flext-center f-start'>
-        <Typography variant='body1'> • No matches finded </Typography>
+        <Typography variant='body1'> • No matches found </Typography>
       </Grid>
       <Grid item xs={6} className='flext-center f-end'>
         <div className={classes.root}>

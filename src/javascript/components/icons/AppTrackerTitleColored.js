@@ -1,7 +1,18 @@
 import React from 'react';
 
+const handleClick = () => {
+  document.location.href = 'https://staging.apptracker.club';
+};
+
 const AppTrackerTitleColored = props => (
-  <svg id='Слой_1' data-name='Слой 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1499.74 225.45' {...props}>
+  <svg
+    onClick={handleClick}
+    id='Слой_1'
+    data-name='Слой 1'
+    xmlns='http://www.w3.org/2000/svg'
+    viewBox='0 0 1499.74 225.45'
+    {...props}
+  >
     <defs>
       <style>
         {'.cls-1{fill:#39eb56;}.cls-2{fill:#ffd503;}.cls-3{fill:#eb7659;}.cls-4{fill:#3866ff;}.cls-5{fill:#9318ff;}'}
