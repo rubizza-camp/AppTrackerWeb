@@ -1,7 +1,7 @@
 import React from 'react';
 
 const handleClick = () => {
-  document.location.href = 'https://staging.apptracker.club';
+  document.location.href = 'https://apptracker.club';
 };
 
 const AppTrackerTitleColored = props => (
