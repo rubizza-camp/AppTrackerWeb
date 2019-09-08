@@ -8,6 +8,8 @@ import Container from '@material-ui/core/Container';
 import AppTrackerTitleColored from './components/icons/AppTrackerTitleColored';
 import Grid from '@material-ui/core/Grid';
 
+import BackgroundPepega1 from './components/background/type1/BackGroundPepega1';
+
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Footer from './Footer';
 
@@ -44,6 +46,7 @@ class App extends React.Component {
   render() {
     return (
       <>
+        <BackgroundPepega1></BackgroundPepega1>
         <div className='content'>
           <Router>
             <Route exact path='/' component={HomePage} />

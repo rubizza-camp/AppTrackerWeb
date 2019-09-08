@@ -94,6 +94,8 @@ const PlotTy1 = ({ countryIndex, storeType, starIndex, starsColors, ploty1Data }
         }
       ]}
       layout={{
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
         showlegend: false,
         margin: {
           l: 20,
@@ -110,11 +112,8 @@ const PlotTy1 = ({ countryIndex, storeType, starIndex, starsColors, ploty1Data }
           color: '#7f7f7f'
         },
         xaxis: {
-          showline: true,
           showgrid: false,
           showticklabels: true,
-          linecolor: 'rgb(255,255,255)',
-          linewidth: 3,
           autotick: true,
           ticks: 'inside',
           tickcolor: 'rgb(55,55,55)',

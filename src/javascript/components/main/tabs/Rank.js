@@ -76,6 +76,8 @@ const newBarChartElement = (width, height, data, autorange_type, title_text) => 
         }
       ]}
       layout={{
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
         legend: {
           x: 0,
           y: -0.75,
@@ -104,11 +106,8 @@ const newBarChartElement = (width, height, data, autorange_type, title_text) => 
           color: '#7f7f7f'
         },
         xaxis: {
-          showline: true,
           showgrid: true,
           showticklabels: true,
-          linecolor: 'rgb(255,255,255)',
-          linewidth: 3,
           autotick: true,
           ticks: 'inside',
           tickcolor: 'rgb(55,55,55)',

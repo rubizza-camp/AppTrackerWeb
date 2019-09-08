@@ -38,6 +38,8 @@ const PieBarChart = (data) => (
       }
     ]}
     layout={{
+      paper_bgcolor: 'rgba(0,0,0,0)',
+      plot_bgcolor: 'rgba(0,0,0,0)',
       title: data[0].x,
       margin: {
         l: 20,
@@ -132,6 +134,8 @@ const NewBarChartElementWithBotAxis = (data) => (
         },
       ]}
       layout={{
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
         showlegend: false,
         margin: {
           l: 50,
@@ -148,10 +152,7 @@ const NewBarChartElementWithBotAxis = (data) => (
           color: '#7f7f7f'
         },
         xaxis: {
-          showline: true,
           showgrid: true,
-          showticklabels: true,
-          linecolor: 'rgb(255,255,255)',
           linewidth: 3,
           autotick: true,
           ticks: 'inside',
@@ -214,6 +215,7 @@ export default function Stars(props) {
         <Tabs
           value={value}
           onChange={handleChange}
+          className='background-op40'
           indicatorColor='primary'
           textColor='primary'
           variant='scrollable'

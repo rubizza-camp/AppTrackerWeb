@@ -363,6 +363,8 @@ const newDownloadBarChartElement = (width, height, data) => (
         }
       ]}
       layout={{
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
         legend: {
           x: 0,
           y: 1,
@@ -392,11 +394,8 @@ const newDownloadBarChartElement = (width, height, data) => (
           color: '#7f7f7f'
         },
         xaxis: {
-          showline: true,
           showgrid: true,
           showticklabels: true,
-          linecolor: 'rgb(255,255,255)',
-          linewidth: 3,
           autotick: true,
           ticks: 'inside',
           tickcolor: 'rgb(55,55,55)',

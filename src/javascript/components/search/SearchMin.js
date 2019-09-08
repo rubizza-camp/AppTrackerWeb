@@ -55,6 +55,7 @@ export default props => {
         className='mdc-elevation--z1'
       >
         <Paper
+          className='background-op40'
           style={{
             borderRadius: 'none !important',
             boxShadow: 'none',
